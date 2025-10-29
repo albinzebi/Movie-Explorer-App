@@ -1,20 +1,34 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-function MovieCard({ id, title, poster, releaseDate, genre, plot }) {
+function MovieCard({ movie, isFavorite, toggleFavorite }) {
   return (
-    <div className="movieCard">
-      <h1>{title}</h1>
-      <img src={poster} alt={`${title} poster`} />
+    <div className="movie-card">
+      <img
+        src={
+          movie.Poster !== "N/A"
+            ? movie.Poster
+            : "https://via.placeholder.com/150"
+        }
+        alt={movie.Title}
+      />
+      <button className="red-heart" onClick={() => toggleFavorite(movie)}>
+        {isFavorite ? (
+          <>
+            <FavoriteIcon />
+          </>
+        ) : (
+          <>
+            <FavoriteBorderIcon />
+          </>
+        )}
+      </button>
+      <h3>{movie.Title}</h3>
       <p>
-        <strong>Release Date:</strong> {releaseDate}
+        <strong>Released:</strong> {movie.Released}
       </p>
-      <p>
-        <strong>Genre:</strong> {genre}
-      </p>
-      <p>{plot}</p>
-      <span>
-        <FavoriteIcon />
-      </span>
+      <p>{movie.Genre}</p>
+      <p>{movie.Plot}</p>
     </div>
   );
 }

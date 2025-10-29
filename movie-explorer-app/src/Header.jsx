@@ -1,7 +1,11 @@
+import MovieIcon from "@mui/icons-material/Movie";
+
 function Header() {
   return (
     <header>
-      <h1>Movie Explorer</h1>
+      <h1>
+        <MovieIcon /> Movie Explorer
+      </h1>
     </header>
   );
 }

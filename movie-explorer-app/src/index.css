@@ -9,13 +9,16 @@ html {
 }
 
 body {
+  line-height: 130%;
   background: #000;
-  padding: 0;
   color: #fff;
+  padding: 0;
+  background-image: url("https://transparenttextures.com/patterns/3px-tile.png");
+
 }
 
 header {
-  background-color: #e2b616;
+  background-color: #8A0303;
   margin: 0;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -39,12 +42,80 @@ footer p {
   color: #ccc;
 }
 
-.movieCard {
-  background: #444;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #e2b616;
-  padding: 10px;
-  width: 420px;
-  margin: 16px;
-  float: left;
+.search-bar {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.search-bar input {
+  padding: 8px;
+  width: 200px;
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  margin-left: 10px;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1090px;
+  margin: 0 auto;
+}
+
+.movie-card {
+  flex: 0 0 350px;
+  box-sizing: border-box;
+  max-width: 350px;
+  text-align: center;
+}
+
+
+.movie-card img {
+  width: auto;
+  max-height: 300px;
+}
+
+.movie-card button,
+h3,
+p {
+  margin-top: 10px;
+}
+
+.red-heart {
+  color: #8A0303;
+  border: none;
+  background-color: transparent;
+  display: block;
+  margin: auto;
+}
+
+.red-heart:hover {
+  padding-left: 3px;
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+
+}
+
+.load-more button {
+  padding: 10px 40px;
+  background-color: #8A0303;
+  border: none;
+  color: #fff;
+}
+
+
+.error {
+  color: red;
 }
