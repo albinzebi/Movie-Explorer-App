@@ -1,8 +1,9 @@
 import MovieCard from "./MovieCard";
+import styles from "./MovieList.module.css";
 
 function MovieList({ movies, favorites, toggleFavorite }) {
   return (
-    <div className="movie-list">
+    <div className={styles.movieList}>
       {movies.map((movie) => (
         <MovieCard
           key={movie.imdbID}

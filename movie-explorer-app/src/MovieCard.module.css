@@ -1,0 +1,38 @@
+.movieCard {
+    flex: 0 0 350px;
+    max-width: 350px;
+    text-align: center;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px var(--primary-color);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movieCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px var(--primary-color);
+}
+
+.movieCard img {
+    width: auto;
+    max-height: 300px;
+}
+
+.movieCard button,
+.movieCard h2,
+.movieCard p {
+    margin-top: 10px;
+    line-height: 130%;
+}
+
+.redHeart {
+    color: var(--primary-color);
+    border: none;
+    background-color: transparent;
+    display: block;
+    margin: auto;
+}
+
+.redHeart:hover {
+    padding-left: 3px;
+}

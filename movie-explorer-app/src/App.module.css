@@ -1,0 +1,62 @@
+.loadingState {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.errorState {
+    text-align: center;
+    margin-top: 30px;
+    color: #b00020;
+}
+
+.errorMessage {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.emptyMessage {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.favoritesHeading {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.loadMore {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.loadMore button {
+    padding: 10px 40px;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loadMore button:hover,
+.loadMore button:focus {
+    background-color: #a10404;
+    outline: none;
+}

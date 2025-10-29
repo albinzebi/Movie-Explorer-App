@@ -1,0 +1,24 @@
+.searchBar {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.searchBar input {
+    padding: 8px;
+    width: 400px;
+}
+
+.searchBar button {
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.searchBar button:hover,
+.searchBar button:focus {
+    background-color: #a10404;
+    outline: none;
+}

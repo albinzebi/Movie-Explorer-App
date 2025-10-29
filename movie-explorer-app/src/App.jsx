@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import MovieList from "./MovieList";
 import Header from "./Header";
+import ErrorIcon from "@mui/icons-material/Error";
+import styles from "./App.module.css";
 
 const API_KEY = "3111aee0";
 
@@ -24,6 +26,9 @@ function App() {
     const timer = setTimeout(() => {
       if (query.trim()) {
         searchMovies();
+      } else {
+        setMovies([]); // Clear movies when query is empty
+        setError(""); // Optionally clear any previous error
       }
     }, 500);
     return () => clearTimeout(timer);
@@ -100,17 +105,20 @@ function App() {
       <Header hasFavorites={favorites.length > 0} />
       <SearchBar query={query} setQuery={setQuery} />
       {loading && (
-        <div className="movie-list">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="skeleton" />
-          ))}
+        <div className={styles.loadingState}>
+          <div className={styles.spinner} />
+          <p>Searching for movies...</p>
         </div>
       )}
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <div className={styles.errorState}>
+          <p className={styles.errorMessage}>
+            <ErrorIcon /> {error}
+          </p>
+        </div>
+      )}
       {!loading && movies.length === 0 && !error && (
-        <p style={{ textAlign: "center", marginTop: "20px" }}>
-          Start by searching for a movie!
-        </p>
+        <p className={styles.emptyMessage}>Start by searching for a movie!</p>
       )}
       <MovieList
         movies={movies}
@@ -118,13 +126,13 @@ function App() {
         toggleFavorite={toggleFavorite}
       />
       {movies.length > 0 && (
-        <div className="load-more">
+        <div className={styles.loadMore}>
           <button onClick={loadMoreMovies}>Load More</button>
         </div>
       )}
       {favorites.length > 0 && (
         <>
-          <h2 id="favorites" style={{ textAlign: "center", marginTop: "40px" }}>
+          <h2 id="favorites" className={styles.favoritesHeading}>
             Your Favorites
           </h2>
           <MovieList

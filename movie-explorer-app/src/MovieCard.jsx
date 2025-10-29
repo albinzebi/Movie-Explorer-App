@@ -1,16 +1,17 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import styles from "./MovieCard.module.css";
 
 function MovieCard({ movie, isFavorite, toggleFavorite }) {
   return (
-    <div className="movie-card">
+    <div className={styles.movieCard}>
       <img
         src={movie.Poster !== "N/A" ? movie.Poster : "https://placehold.co/150"}
         alt={movie.Title}
       />
       <button
         title="fav/unfav"
-        className="red-heart"
+        className={styles.redHeart}
         onClick={() => toggleFavorite(movie)}
       >
         {isFavorite ? (
