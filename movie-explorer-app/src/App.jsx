@@ -27,8 +27,8 @@ function App() {
       if (query.trim()) {
         searchMovies();
       } else {
-        setMovies([]); // Clear movies when query is empty
-        setError(""); // Optionally clear any previous error
+        setMovies([]);
+        setError("");
       }
     }, 500);
     return () => clearTimeout(timer);
