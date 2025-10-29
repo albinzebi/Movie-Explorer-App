@@ -29,7 +29,7 @@ function MovieCard({ movie, isFavorite, toggleFavorite }) {
         <strong>Released:</strong> {movie.Released}
       </p>
       <p>{movie.Genre}</p>
-      <p>{movie.Plot}</p>
+      <p className={styles.plot}>{movie.Plot}</p>
     </div>
   );
 }
