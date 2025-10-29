@@ -1,25 +1,20 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-function MovieCard(props) {
-  function handleClick() {
-    props.onDelete(props.id);
-  }
-
+function MovieCard({ id, title, poster, releaseDate, genre, plot }) {
   return (
     <div className="movieCard">
-      <h1>title</h1>
-      <img src="https://placehold.co/400x300" />
-      <p>release date</p>
-      <p>genre</p>
+      <h1>{title}</h1>
+      <img src={poster} alt={`${title} poster`} />
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        inventore, reprehenderit maiores doloribus vitae ducimus ullam placeat
-        minus voluptatibus consectetur, accusantium, fugit fugiat magnam eius
-        quas dolorum explicabo aut dignissimos.
+        <strong>Release Date:</strong> {releaseDate}
       </p>
-      <button onClick={handleClick}>
+      <p>
+        <strong>Genre:</strong> {genre}
+      </p>
+      <p>{plot}</p>
+      <span>
         <FavoriteIcon />
-      </button>
+      </span>
     </div>
   );
 }

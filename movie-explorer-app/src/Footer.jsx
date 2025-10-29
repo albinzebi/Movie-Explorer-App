@@ -1,7 +1,8 @@
 function Footer() {
+  const year = new Date().getFullYear();
   return (
     <footer>
-      <p>All rights reserved Albin.</p>
+      <p>Copyright Albin ⓒ {year}</p>
     </footer>
   );
 }
