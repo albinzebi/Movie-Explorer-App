@@ -5,14 +5,14 @@ function MovieCard({ movie, isFavorite, toggleFavorite }) {
   return (
     <div className="movie-card">
       <img
-        src={
-          movie.Poster !== "N/A"
-            ? movie.Poster
-            : "https://via.placeholder.com/150"
-        }
+        src={movie.Poster !== "N/A" ? movie.Poster : "https://placehold.co/150"}
         alt={movie.Title}
       />
-      <button className="red-heart" onClick={() => toggleFavorite(movie)}>
+      <button
+        title="fav/unfav"
+        className="red-heart"
+        onClick={() => toggleFavorite(movie)}
+      >
         {isFavorite ? (
           <>
             <FavoriteIcon />
@@ -23,7 +23,7 @@ function MovieCard({ movie, isFavorite, toggleFavorite }) {
           </>
         )}
       </button>
-      <h3>{movie.Title}</h3>
+      <h2>{movie.Title}</h2>
       <p>
         <strong>Released:</strong> {movie.Released}
       </p>

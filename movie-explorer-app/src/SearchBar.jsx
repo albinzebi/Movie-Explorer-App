@@ -1,4 +1,4 @@
-function SearchBar({ query, setQuery, onSearch }) {
+function SearchBar({ query, setQuery }) {
   return (
     <div className="search-bar">
       <input
@@ -7,7 +7,6 @@ function SearchBar({ query, setQuery, onSearch }) {
         placeholder="Search movies..."
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={onSearch}>Search</button>
     </div>
   );
 }

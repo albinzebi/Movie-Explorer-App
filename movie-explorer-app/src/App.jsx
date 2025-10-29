@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import MovieList from "./MovieList";
 import Header from "./Header";
-import Footer from "./Footer";
 
 const API_KEY = "3111aee0";
 
@@ -15,29 +14,33 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [allResults, setAllResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const MOVIES_PER_PAGE = 3;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (query.trim()) {
+        searchMovies();
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [query]);
 
   const searchMovies = async () => {
     setLoading(true);
     setError("");
-    setCurrentPage(1); // Reset to first page
+    setCurrentPage(1);
     try {
       const res = await fetch(
-        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`
+        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}&page=1`
       );
       const data = await res.json();
       if (data.Response === "True") {
-        setAllResults(data.Search); // Save all results
-        const limited = data.Search.slice(0, MOVIES_PER_PAGE);
         const detailedMovies = await Promise.all(
-          limited.map(async (movie) => {
+          data.Search.map(async (movie) => {
             const detailRes = await fetch(
               `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}&plot=short`
             );
@@ -58,23 +61,29 @@ function App() {
 
   const loadMoreMovies = async () => {
     const nextPage = currentPage + 1;
-    const startIndex = (nextPage - 1) * MOVIES_PER_PAGE;
-    const nextBatch = allResults.slice(
-      startIndex,
-      startIndex + MOVIES_PER_PAGE
-    );
-
-    const detailedMovies = await Promise.all(
-      nextBatch.map(async (movie) => {
-        const detailRes = await fetch(
-          `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}&plot=short`
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}&page=${nextPage}`
+      );
+      const data = await res.json();
+      if (data.Response === "True") {
+        const detailedMovies = await Promise.all(
+          data.Search.map(async (movie) => {
+            const detailRes = await fetch(
+              `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}&plot=short`
+            );
+            return await detailRes.json();
+          })
         );
-        return await detailRes.json();
-      })
-    );
-
-    setMovies((prev) => [...prev, ...detailedMovies]);
-    setCurrentPage(nextPage);
+        setMovies((prev) => [...prev, ...detailedMovies]);
+        setCurrentPage(nextPage);
+      }
+    } catch (err) {
+      setError("Failed to load more movies.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const toggleFavorite = (movie) => {
@@ -88,21 +97,43 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <SearchBar query={query} setQuery={setQuery} onSearch={searchMovies} />
-      {loading && <p>Loading...</p>}
+      <Header hasFavorites={favorites.length > 0} />
+      <SearchBar query={query} setQuery={setQuery} />
+      {loading && (
+        <div className="movie-list">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="skeleton" />
+          ))}
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
+      {!loading && movies.length === 0 && !error && (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Start by searching for a movie!
+        </p>
+      )}
       <MovieList
         movies={movies}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
       />
-      {movies.length > 0 && movies.length < allResults.length && (
+      {movies.length > 0 && (
         <div className="load-more">
           <button onClick={loadMoreMovies}>Load More</button>
         </div>
       )}
-      <Footer />
+      {favorites.length > 0 && (
+        <>
+          <h2 id="favorites" style={{ textAlign: "center", marginTop: "40px" }}>
+            Your Favorites
+          </h2>
+          <MovieList
+            movies={favorites}
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+          />
+        </>
+      )}
     </div>
   );
 }
