@@ -1,7 +1,7 @@
 # 🎥 Movie Explorer App
 This is a React application that lets you search for movies and mark your favorites using the OMDb API. You can browse movie details, add favorites, and load more results with pagination.
 
-##🚀 Getting Started
+## 🚀 Getting Started
 I began this project by setting up the development environment using Vite for a fast and modern React setup. I then installed Material UI to incorporate a few icons used throughout the app.
 After initializing the project, I created a GitHub repository to manage version control and track changes.
 To fetch movie data, I registered for a free API key from the OMDb website, which was sent to my email. 
@@ -13,7 +13,7 @@ The favorite movies are saved locally in the browser localStorage.
 I have also added pagination as you can load more movies by clicking on the load more button. As for styling I have used CSS modules. 
 In the end I deployed this project to github pages. 
 
-##🧩 Features
+## 🧩 Features
 - Search Movies: Search for movies by title using the OMDb API.
 - Movie Details: Each movie card displays the title, poster, release year, genre, and a short plot summary.
 - Favorites: Mark movies as favorites using a heart icon. Favorites are saved in the browser’s localStorage for persistence.
@@ -21,7 +21,7 @@ In the end I deployed this project to github pages.
 - Styling: Styled using CSS Modules for scoped and maintainable styles.
 - Deployment: The app is deployed on GitHub Pages.
 
-##📦 Components
+## 📦 Components
 - Header: Displays the app title and navigation.
 - SearchBar: Allows users to input search queries.
 - MovieCard: Shows individual movie details and favorite toggle.
