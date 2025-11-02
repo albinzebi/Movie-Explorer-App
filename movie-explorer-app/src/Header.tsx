@@ -1,7 +1,11 @@
 import MovieIcon from "@mui/icons-material/Movie";
 import styles from "./Header.module.css";
 
-function Header({ hasFavorites }) {
+interface HeaderProps {
+  hasFavorites: boolean;
+}
+
+function Header({ hasFavorites }: HeaderProps) {
   return (
     <header className={styles.header}>
       <h1>

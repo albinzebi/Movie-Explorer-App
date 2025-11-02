@@ -1,8 +1,16 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Movie } from "./Movie"; 
 import styles from "./MovieCard.module.css";
 
-function MovieCard({ movie, isFavorite, toggleFavorite }) {
+
+interface MovieCardProps {
+  movie: Movie;
+  isFavorite: boolean;
+  toggleFavorite: (movie: Movie) => void;
+}
+
+function MovieCard({ movie, isFavorite, toggleFavorite }: MovieCardProps) {
   return (
     <div className={styles.movieCard}>
       <img
@@ -14,15 +22,7 @@ function MovieCard({ movie, isFavorite, toggleFavorite }) {
         className={styles.redHeart}
         onClick={() => toggleFavorite(movie)}
       >
-        {isFavorite ? (
-          <>
-            <FavoriteIcon />
-          </>
-        ) : (
-          <>
-            <FavoriteBorderIcon />
-          </>
-        )}
+        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </button>
       <h2>{movie.Title}</h2>
       <p>

@@ -2,21 +2,24 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import MovieList from "./MovieList";
 import Header from "./Header";
+import { Movie } from "./Movie";
 import ErrorIcon from "@mui/icons-material/Error";
 import styles from "./App.module.css";
 
 const API_KEY = "3111aee0";
 
-function App() {
-  const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [favorites, setFavorites] = useState(
-    () => JSON.parse(localStorage.getItem("favorites")) || []
-  );
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const [currentPage, setCurrentPage] = useState(1);
+
+function App() {
+  const [query, setQuery] = useState<string>("");
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [favorites, setFavorites] = useState<Movie[]>(() => {
+    const stored = localStorage.getItem("favorites");
+    return stored ? JSON.parse(stored) : [];
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -44,8 +47,8 @@ function App() {
       );
       const data = await res.json();
       if (data.Response === "True") {
-        const detailedMovies = await Promise.all(
-          data.Search.map(async (movie) => {
+        const detailedMovies: Movie[] = await Promise.all(
+          data.Search.map(async (movie: { imdbID: string }) => {
             const detailRes = await fetch(
               `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}&plot=short`
             );
@@ -73,8 +76,8 @@ function App() {
       );
       const data = await res.json();
       if (data.Response === "True") {
-        const detailedMovies = await Promise.all(
-          data.Search.map(async (movie) => {
+        const detailedMovies: Movie[] = await Promise.all(
+          data.Search.map(async (movie: { imdbID: string }) => {
             const detailRes = await fetch(
               `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}&plot=short`
             );
@@ -91,7 +94,7 @@ function App() {
     }
   };
 
-  const toggleFavorite = (movie) => {
+  const toggleFavorite = (movie: Movie) => {
     const exists = favorites.find((fav) => fav.imdbID === movie.imdbID);
     if (exists) {
       setFavorites(favorites.filter((fav) => fav.imdbID !== movie.imdbID));

@@ -1,6 +1,11 @@
 import styles from "./SearchBar.module.css";
 
-function SearchBar({ query, setQuery }) {
+interface SearchBarProps {
+  query: string;
+  setQuery: (value: string) => void;
+}
+
+function SearchBar({ query, setQuery }: SearchBarProps) {
   return (
     <div className={styles.searchBar}>
       <input

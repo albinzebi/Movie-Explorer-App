@@ -1,7 +1,16 @@
 import MovieCard from "./MovieCard";
+import { Movie } from "./Movie";
 import styles from "./MovieList.module.css";
 
-function MovieList({ movies, favorites, toggleFavorite }) {
+
+
+interface MovieListProps {
+  movies: Movie[];
+  favorites: Movie[];
+  toggleFavorite: (movie: Movie) => void;
+}
+
+function MovieList({ movies, favorites, toggleFavorite }: MovieListProps) {
   return (
     <div className={styles.movieList}>
       {movies.map((movie) => (
